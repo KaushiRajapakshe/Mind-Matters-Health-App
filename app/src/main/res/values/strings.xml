@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">Mind Matters</string>
+    <string name="open_drawer">Open drawer</string>
+    <string name="close_drawer">Close drawer</string>
+    <string name="default_web_client_id">AIzaSyD0yfUuYip_qRMqBfVWK8cUnjJc1TaoRps</string>
+    <string name="facebook_app_id">1823673061529513</string>
+    <string name="book_a_counselling_session">Book a Counselling Session</string>
+    <string name="select_category">Select Category</string>
+    <string name="select_date">Select Date</string>
+    <string name="tap_to_choose_date">Tap to choose date</string>
+    <string name="select_time">Select Time</string>
+    <string name="tap_to_choose_time">Tap to choose time</string>
+    <string name="message_notes_optional">Message / Notes (Optional)</string>
+    <string name="type_your_message">Type your message...</string>
+    <string name="book_session">Book Session</string>
+    <string name="relaxing_music">Relaxing Music</string>
+    <string name="play">Play</string>
+    <string name="type_a_message">Type a message</string>
+    <string name="send">Send</string>
+    <string name="edit_appointment">Edit Appointment</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="notes">Notes</string>
+    <string name="update_appointment">Update Appointment</string>
+    <string name="need_immediate_help">Need Immediate Help?</string>
+    <string name="call_emergency">Call Emergency</string>
+    <string name="question">Question</string>
+    <string name="next">Next</string>
+    <string name="simplify_your_mental_health_journey_with_us">Simplify Your Mental Health Journey With Us</string>
+    <string name="search">Search</string>
+    <string name="app_logo">App Logo</string>
+    <string name="login_mind_matters_nhealth_app">Login Mind Matters\nHealth App</string>
+    <string name="user_name_or_email">User Name Or Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? Sign Up</string>
+    <string name="or_log_in_with">Or log in with</string>
+    <string name="apple_login">Apple Login</string>
+    <string name="google_login">Google Login</string>
+    <string name="facebook_login">Facebook Login</string>
+    <string name="instagram_login">Instagram Login</string>
+    <string name="notifications">Notifications</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="full_name">Full Name</string>
+    <string name="email_address">Email Address</string>
+    <string name="bio">Bio</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="score">Score</string>
+    <string name="create_an_account">Create an Account</string>
+    <string name="enter_the_correct_information_and_create_your_account">Enter the correct Information and create Your Account</string>
+    <string name="your_complete_name">Your complete name</string>
+    <string name="user_name">User name</string>
+    <string name="select_date_of_birth">Select Date of Birth</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="enter_passwords_more_than_8_characters">Enter Passwords (More Than 8 Characters)</string>
+    <string name="re_enter_passwords">Re-Enter Passwords</string>
+    <string name="i_agree_with_the_terms_of_service_and_privacy_policy">I agree with the Terms of Service and Privacy policy</string>
+    <string name="already_have_an_account_log_in">Already have an account? Log in</string>
+    <string name="your_appointments">Your Appointments</string>
+    <string name="welcome_to_mind_nmatters_health_app">Welcome to Mind\nMatters Health App</string>
+    <string name="illustration">Illustration</string>
+    <string name="swipe_to_get_started">Swipe to Get Started</string>
+    <string name="category">Category</string>
+    <string name="date_time">Date - Time</string>
+    <string-array name="months">
+        <item>January</item><item>February</item><item>March</item>
+        <item>April</item><item>May</item><item>June</item>
+        <item>July</item><item>August</item><item>September</item>
+        <item>October</item><item>November</item><item>December</item>
+    </string-array>
+
+    <string-array name="dates">
+        <item>1</item><item>2</item><item>3</item><item>4</item><item>5</item><item>6</item>
+        <item>7</item><item>8</item><item>9</item><item>10</item><item>11</item><item>12</item>
+        <item>13</item><item>14</item><item>15</item><item>16</item><item>17</item><item>18</item>
+        <item>19</item><item>20</item><item>21</item><item>22</item><item>23</item><item>24</item>
+        <item>25</item><item>26</item><item>27</item><item>28</item><item>29</item><item>30</item>
+        <item>31</item>
+    </string-array>
+
+    <string-array name="years">
+        <item>2000</item><item>2001</item><item>2002</item> <!-- or generate in Java -->
+    </string-array>
+
+</resources>

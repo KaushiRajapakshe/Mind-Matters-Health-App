@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@drawable/bg_gradient"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/welcomeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="42dp"
+        android:gravity="center"
+        android:text="@string/welcome_to_mind_nmatters_health_app"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/centerImage"
+        android:layout_width="400dp"
+        android:layout_height="400dp"
+        android:src="@drawable/mind"
+        android:contentDescription="@string/illustration" />
+
+    <Button
+        android:id="@+id/startButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/swipe_to_get_started"
+        android:drawableStart="@drawable/ic_swipe_arrow"
+        android:drawablePadding="8dp"
+        android:textStyle="bold"
+        android:backgroundTint="#C8FBFE"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="40dp"
+        android:padding="12dp"
+        android:elevation="6dp"/>
+</LinearLayout>

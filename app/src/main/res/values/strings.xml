@@ -62,6 +62,14 @@
     <string name="swipe_to_get_started">Swipe to Get Started</string>
     <string name="category">Category</string>
     <string name="date_time">Date - Time</string>
+    <string name="save_medication">Save Medication</string>
+    <string name="additional_notes">Additional Notes</string>
+    <string name="dosage_e_g_500mg">Dosage (e.g. 500mg)</string>
+    <string name="medication_name">Medication Name</string>
+    <string name="your_medications">Your Medications</string>
+    <string name="add_emergency_contact">Add Emergency Contact</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
     <string-array name="months">
         <item>January</item><item>February</item><item>March</item>
         <item>April</item><item>May</item><item>June</item>

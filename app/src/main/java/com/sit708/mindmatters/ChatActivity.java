@@ -3,16 +3,23 @@ package com.sit708.mindmatters;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -20,8 +27,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ChatActivity extends AppCompatActivity {
 
+    private List<GamesActivity.QuizItem> quizList = new ArrayList<>();
+    private int currentIndex = 0;
     private RecyclerView recyclerViewChat;
     private EditText editMessage;
     private ImageButton btnSend;
@@ -81,6 +91,42 @@ public class ChatActivity extends AppCompatActivity {
         }
 
         addBotMessage("Sorry, I don't have a response for that yet.");
+    }
+
+    private void showQuestion(int index) {
+        GamesActivity.QuizItem item = quizList.get(index);
+        editMessage.setText(item.question);
+        recyclerViewChat.removeAllViews();
+
+        for (String option : item.options) {
+            RadioButton rb = new RadioButton(this);
+            rb.setText(option);
+            rb.setTextSize(18f);
+            recyclerViewChat.addView(rb);
+        }
+    }
+
+    private void parseQuizJson(String jsonString) {
+        try {
+            JSONObject obj = new JSONObject(jsonString);
+            JSONArray quizArray = obj.getJSONArray("quiz");
+
+            for (int i = 0; i < quizArray.length(); i++) {
+                JSONObject quizObj = quizArray.getJSONObject(i);
+                String question = quizObj.getString("question");
+                String correct = quizObj.getString("correct_answer");
+                JSONArray optionsJson = quizObj.getJSONArray("options");
+
+                List<String> options = new ArrayList<>();
+                for (int j = 0; j < optionsJson.length(); j++) {
+                    options.add(optionsJson.getString(j));
+                }
+
+                quizList.add(new GamesActivity.QuizItem(question, correct, options));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void addBotMessage(String msg) {

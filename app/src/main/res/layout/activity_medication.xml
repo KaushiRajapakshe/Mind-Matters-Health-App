@@ -1,0 +1,68 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_gradient">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/medication_name"
+            android:background="@drawable/edittext_bg"
+            android:padding="12dp" />
+
+        <EditText android:id="@+id/etDosage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/dosage_e_g_500mg"
+            android:background="@drawable/edittext_bg"
+            android:padding="12dp"
+            android:layout_marginTop="12dp" />
+
+        <EditText android:id="@+id/etTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/time"
+            android:focusable="false"
+            android:background="@drawable/edittext_bg"
+            android:padding="12dp"
+            android:layout_marginTop="12dp" />
+
+        <EditText android:id="@+id/etNotes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/additional_notes"
+            android:background="@drawable/edittext_bg"
+            android:padding="12dp"
+            android:layout_marginTop="12dp" />
+
+        <Button
+            android:id="@+id/btnSaveMedication"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#C7F8FF"
+            android:text="@string/save_medication"
+            android:textColor="#000"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_medications"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"/>
+
+        <ListView
+            android:id="@+id/listMedications"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp" />
+
+    </LinearLayout>
+</ScrollView>

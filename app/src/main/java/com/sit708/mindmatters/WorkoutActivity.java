@@ -7,14 +7,25 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.*;
 
 public class WorkoutActivity extends AppCompatActivity {
 
     private WebView webView;
     private FirebaseFirestore db;
+    private String userId;
+
+    private List<Map<String, Object>> videoList = new ArrayList<>();
+    private List<String> videoKeys = new ArrayList<>();
+    private int nextVideoIndex = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,37 +34,84 @@ public class WorkoutActivity extends AppCompatActivity {
 
         webView = findViewById(R.id.webView);
         db = FirebaseFirestore.getInstance();
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         setupWebView();
-        loadVideoFromFirestore();
+        loadVideosFromFirestore();
     }
 
     private void setupWebView() {
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setDomStorageEnabled(true);
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        settings.setDomStorageEnabled(true);
         webView.setWebChromeClient(new WebChromeClient());
     }
 
-    private void loadVideoFromFirestore() {
+    private void loadVideosFromFirestore() {
         db.collection("videos").document("workout").get()
                 .addOnSuccessListener(doc -> {
                     if (doc.exists()) {
-                        String url = doc.getString("url");
-                        if (url != null && url.contains("youtu.be")) {
-                            String videoId = extractVideoId(url);
-                            loadYouTubeVideo(videoId);
+                        Object rawVideoList = doc.get("videoList");
+
+                        if (rawVideoList instanceof Map) {
+                            videoList.clear();
+                            videoKeys.clear();
+
+                            Map<String, Object> videoMap = (Map<String, Object>) rawVideoList;
+
+                            // Sort by numeric key
+                            List<String> sortedKeys = new ArrayList<>(videoMap.keySet());
+                            Collections.sort(sortedKeys, Comparator.comparingInt(Integer::parseInt));
+
+                            for (String key : sortedKeys) {
+                                Object item = videoMap.get(key);
+                                if (item instanceof Map) {
+                                    videoList.add((Map<String, Object>) item);
+                                    videoKeys.add(key);
+                                }
+                            }
+
+                            showNextUnwatchedVideo();
                         } else {
-                            Toast.makeText(this, "Invalid or missing workout video URL", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Invalid videoList format", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(this, "Workout video not found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Workout videos not found", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error fetching workout video", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Error fetching videos", Toast.LENGTH_SHORT).show();
                     Log.e("WorkoutActivity", "Firestore error", e);
                 });
+    }
+
+    private void showNextUnwatchedVideo() {
+        for (int i = 0; i < videoList.size(); i++) {
+            Map<String, Object> video = videoList.get(i);
+            List<String> watchedBy = (List<String>) video.get("watchedBy");
+
+            if (watchedBy == null || !watchedBy.contains(userId)) {
+                nextVideoIndex = i;
+                String url = (String) video.get("url");
+
+                if (url != null) {
+                    String videoId = extractVideoId(url);
+                    loadYouTubeVideo(videoId);
+                    markVideoAsWatched(videoKeys.get(i));
+                }
+                return;
+            }
+        }
+
+        Toast.makeText(this, "You've watched all workout videos!", Toast.LENGTH_LONG).show();
+    }
+
+    private void markVideoAsWatched(String key) {
+        DocumentReference ref = db.collection("videos").document("workout");
+
+        ref.update("videoList." + key + ".watchedBy", FieldValue.arrayUnion(userId))
+                .addOnSuccessListener(aVoid -> Log.d("Workout", "Marked as watched"))
+                .addOnFailureListener(e -> Log.e("Workout", "Failed to mark watched", e));
     }
 
     private void loadYouTubeVideo(String videoId) {

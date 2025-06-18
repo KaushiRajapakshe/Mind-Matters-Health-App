@@ -40,6 +40,7 @@ dependencies {
     implementation("com.google.firebase:firebase-bom:32.7.0")
     implementation("com.google.firebase:firebase-auth:22.2.0")
     implementation("com.google.firebase:firebase-firestore")
+    implementation("com.google.firebase:firebase-storage:20.3.0")
     implementation("org.json:json:20240303")
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation ("com.facebook.android:facebook-android-sdk:latest.release")
